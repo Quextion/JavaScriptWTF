@@ -1,0 +1,28 @@
+.ball{
+  height: 200px;
+  width: 200px;
+  background-color: pink;
+  border-radius: 50%;
+  margin: 100px;
+}
+
+.ball1{
+  animation: move1 1s alternate infinite ease-in-out;
+}
+
+.ball2{
+  position: relative;
+  left: 0;
+  animation: move2 1s alternate infinite ease-in-out;
+}
+
+@keyframes move1{
+  to{
+    transform: translate(200px);
+  }
+}
+@keyframes move2{
+  to{
+    left: 200px;
+  }
+}
