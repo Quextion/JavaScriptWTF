@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //爆杀阿里 四面试题
+    //实例方法
+    Object.prototype.a = function () {
+      console.log('a');
+    };
+
+    //实例方法
+    Function.prototype.b = function () {
+      console.log('b');
+    };
+
+    //只要涉及到对象你就去思考
+    //1.__proto__ -> 构造函数 的 prototype
+    //2.如果他是函数对象，prototype
+
+    var F = function () { }; //函数对象 new Function
+    var f = new F(); // //
+    // console.log(F);
+
+    f.a();//[[GET]] -> 沿着__proto__  //a
+    f.b();
+    F.a();//'a'
+    F.b();//'b'
+
+  </script>
+</body>
+
+</html>
