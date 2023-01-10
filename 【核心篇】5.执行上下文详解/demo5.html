@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function foo() {
+      a = 1;
+      let a = 2;
+      function bar() {
+        console.log(++a);
+      }
+      return bar;
+    }
+
+    let bar = foo();
+    bar();
+    bar();
+
+
+
+  //   function foo() {
+  //   let a = 2;
+  //   return { a } //es6对象语法糖 等于 {a : a}
+  // }
+
+  // let bar = foo();
+  // console.log(++bar.a); //3
+  // console.log(++bar.a); //4
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <div>test</div>
+  <div>test2</div>
+  <script>
+    //1.
+    // Object 和 Function
+
+    // 关于 {} 和 function() {}
+    // Object.prototype.__proto__  = null;   //不是所有对象都是Object的实例
+    // Function.prototype.__proto__ =   Object.prototype           new Object();
+    // Object.__proto__ = Function.prototype   new Function
+    // Function.__proto__ = Function.prototype
+    // console.dir(Function);
+
+
+    //2.修改代码
+    //如何用原型链 来用面向对象的思维编程
+    // var s1 = {
+    //   name: "jack",
+    //   sex: 'male',
+    //   age: 18,
+    //   major: 'cs',
+    //   hobby: "music"
+    // }
+
+    // var s2 = {
+    //   name: "lucy",
+    //   sex: 'female',
+    //   age: 20,
+    //   major: 'english',
+    // }
+
+    //函数执行如何查找变量？ -> 函数执行上下文中
+    //模拟类
+    // function Student(name,sex,age,major){
+    //   this.name = name;
+    //   this.sex = sex;
+    //   this.age = age;
+    //   this.major = major;
+    // }
+    // Student.prototype.study = function(){
+    //   console.log(this.name + '正在学习');
+    // }
+
+    // var s1 = new Student('jack',18,'male', 'cs');
+    // s1.hobby = 'music';
+    // var s2 = new Student('lucy',20,'female', 'english');
+    //[[GET]] ->
+
+    // function Student(sex, name, major) {
+    //   this.sex = sex;
+    //   this.name = name;
+    //   this.major = major;
+    // }
+
+    // Student.prototype.skill = function () {
+    //   console.log("学习" + this.major);
+    // }
+
+    // var s1 = new Student('male', 'jack', 'cs');
+    // var s2 = new Student('female', 'lucy', 'x');
+    // console.log(s1, s2);
+
+
+    //3.instanceof方法
+    // 本质：递归
+    // a是不是Object的实例
+    // a instanceof Func
+    //作用： 判断 a 是不是 Func 的一个实例
+    //1. s1.__proto__ === Object.prototype -> false
+    //(1)
+    // s1.__proto__ === Object.prototype
+
+    //1.s1.__proto__ = Student.prototype
+    //2.Student.prototype.__proto__  === Object.prototype // true
+
+    // 1.
+    // a.__proto__ === Object.prototype;//false
+
+    // 2.
+    // a.__proto__.__proto__ === Object.prototype;//true
+
+
+    // function foo() {
+    // }
+    // function bar() {
+    // }
+    // var a = new foo();
+    // Object.myInstanceOf = function (obj, Fun) {
+    //   if(obj === null) return false;
+
+    //   if (Object.getPrototypeOf(obj) === Fun.prototype) {
+    //     return true;
+    //   } else {
+    //     return Object.myInstanceOf(Object.getPrototypeOf(obj), Fun);
+    //   }
+    //   //Object.getPrototypeOf(obj) -> 对象的隐式原型
+    // }
+
+    // function bar(){
+
+    // }
+    // console.log( Object.myInstanceOf(s1,Object));
+
+    // console.log(Object.myInstanceOf(a, Object));
+
+
+
+
+    //4.数组和类数组
+    //arguments
+    //dom
+    // var arrLike = document.getElementsByTagName('div');
+    // arr-like
+    // var a = [1,2,3];
+    // a = {
+    //   "0": 1,
+    //   "1": 2,
+    //   "2": 3,
+    //   "length": 3,
+    //   __proto__ : Array.prototype
+    // }
+
+    // function demo(){
+    //   console.log(arguments);
+    // }
+    // demo(1,2,3);
+
+
+    // function abc() {
+    //   console.log(arguments);
+    // }
+
+    // abc(1, 2, 3);
+    //数组的实例方法
+
+    // console.log(document.getElementsByTagName('div'));
+
+    // String的包装类
+    // var a = "hello";
+    // console.log(a[2]);
+    // console.log(a.length);
+
+
+    // var t = { a: 1 };
+    // var x = Object.create(t);
+    // console.log(x);
+    //返回一个没有任何属性对象
+
+
+    //5.隐式原型的修改
+    // 浏览器： __proto__ //效率上
+    //
+    //Object.getPrototypeOf(obj) -> 返回参数对象的隐式原型
+
+    //Object.setPrototypeOf(obj,Obj)
+
+    //返回一个以obj为隐式原型的值的对象
+    //Object.create(obj)
+    //如何得到没有任何属性的对象?
+
+    // var obj = {
+    //   a:1
+    // }
+    // // obj = new Object();
+    // // obj.a = 1;
+    // new Function();
+
+    // var o = Object.create(obj); //
+    // console.log(o);
+
+
+
+    //忽略掉getter和setter以及属性描述符
+
+    // 题目1 （网易云音乐）
+    // 难度：满星
+    // 考点：LHS&RHS (状态的读和写) [[GET]] 和 [[PUT]] ,
+    // 所有的程序 -> 状态机
+    // // 数据的集合 -> 读和写
+    // var b = 2;
+    // var a = b;
+    //LHS   RHS
+    //[[PUT]]  [[GET]]
+
+    // function A(){};
+    // A.prototype.n = 3;
+    // A.prototype.add1 = function () {
+
+    //   this.n++;
+    //   // this.n = this.n + 1; //RHS [[GET]]
+    //   // LHS->[[PUT]]
+
+    // }
+    // var a = new A();
+    // var b = new A();
+    // var c = new A();
+    // a.add1(); //[[GET]] //关于this 绑定this
+    // console.log(a);
+    // b.add1(); // b.n = 4
+    // console.log(b);
+    // console.log(a.n,b.n,c.n) // 4, 4, 3
+    //[[GET]] 和 [[PUT]]
+    // function A(){};
+    // A.prototype.m = { t: 1 };
+    // A.prototype.add2 = function () {
+    //   this.m.t++ ;//覆盖
+    //   //[[PUT]]
+    // }
+    // var d = new A();
+
+    // d.add2();
+    // console.log(d.m.t);//[[GET]]
+
+
+
+    // 题目2：
+    // function Person(name, age) {
+    //   this.name = name;
+    //   this.age = age;
+    //   this.eat = function () {
+    //     console.log(age + "岁的" + name + "在吃饭。");
+    //   }
+    // }
+
+    // Person.run = function () { } //静态
+    // Person.prototype.walk = function () { }
+
+
+
+    // let p1 = new Person("jsliang", 24);
+    // let p2 = new Person("jsliang", 24);
+
+    // // 对象的引用 的值判断 -> 判断地址
+    // console.log(p1.eat === p2.eat); //false
+    // console.log(p1.run === p2.run); //true
+    // console.log(p1.walk === p2.walk); //true
+
+
+
+
+    // 题目3
+    // function foo() {
+    //   this.some = '222'
+    //   let ccc = 'ccc'
+    //   foo.obkoro1 = 'obkoro1'
+    //   foo.prototype.a = 'aaa'
+    // }
+
+    // foo.koro = '扣肉'
+
+    // foo.prototype.test = 'test'
+
+    // let foo1 = new foo()
+    // foo.prototype.test = 'test2'
+    //foo1 访问到哪些属性？
+
+    //6.继承
+  </script>
+</body>
+
+</html>

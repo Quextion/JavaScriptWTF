@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,minimal-ui:ios">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+  <script>
+    //1.不会提升
+    //2.必须通过new调用
+
+
+
+    // var s1 = new Student('jack', 18, 'male', '家里蹲', 'cs');
+    // console.log(s1);
+
+
+    //ES5写法：继承：
+    //https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/setPrototypeOf
+    function People(name, age, sex) {
+      this.name = name;
+      this.age = age;
+      this.sex = sex;
+    }
+    People.prototype.eat = function () {
+      console.log(this.name + "正在吃饭");
+    }
+
+    //extends -> 1. 2.
+    const Buffer = Object.create(People.prototype);
+    function Student(name, age, sex, school, major) {
+      People.call(this, name, age, sex)
+      this.school = school;
+      this.major = major;
+    }
+    Student.prototype = Buffer;
+
+
+    var a = new Student('jack', 18, 'male', 'xxx', 'yyy');
+    a.eat();
+
+
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    //变量提升
+    // 
+
+    console.dir(demo);
+
+    function demo(a, b) {
+      var x1 = 1;
+      let x2 = 2;
+    }
+    //[[SCOPE]] -> 当前的执行上下文
+
+    var demo;
+
+    //函数对象
+    demo();
+
+    let bar;
+    // TDZ
+    // 只能在声明之后赋值
+    // var demo = 1;
+
+  </script>
+</body>
+
+</html>
