@@ -1,5 +1,5 @@
-﻿# JavaScript 深度进阶课程
-> 最新网站（建设中）：https://docs.cos02.top/
+﻿# JavaScriptWTF
+![JS WTF!](https://github.com/Quextion/JavaScriptWTF/assets/102515482/51176020-c995-4824-9cd6-e82afb628402)
 
 
 ## ✨课程介绍
